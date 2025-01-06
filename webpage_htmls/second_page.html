@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fade-In Text and Button Fade-Out</title>
+    <style>
+        /* Initial styles for the body */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Sarpanch", sans-serif;
+            background-color: #1a1a2e;
+            color: #f0f0f0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        /* Define the fade-in animation for text */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Apply the fade-in effect to all text blocks initially */
+        .fade-text {
+            opacity: 0;
+            animation: fadeIn 6s cubic-bezier(0.4, 0, 0.2, 1) forwards; /* Slower and smoother (6 seconds, cubic-bezier easing) */
+            display: none; /* Hide initially */
+        }
+
+        /* Delay each block with a unique delay value */
+        .fade-text:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .fade-text:nth-child(2) {
+            animation-delay: 4s; /* Starts after the previous text block */
+        }
+
+        .fade-text:nth-child(3) {
+            animation-delay: 6s;
+        }
+
+        /* Style for the button */
+        .button-class {
+            background-color: #2e3b52; /* Muted dark blue background */
+            border: none;
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
+            border-radius: 4px;
+            text-decoration: none;  /* Remove underline from the link */
+            transition: transform 0.3s ease, background-color 0.3s ease, opacity 1s ease-out;
+            opacity: 0;  /* Initially hidden */
+            pointer-events: none;  /* Disable button initially */
+            font-family: "Sarpanch", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .button-class:hover {
+            background-color: #243140; /* Darker shade on hover */
+        }
+
+        .button-class:active {
+            transform: scale(0.98); /* Slight shrinking effect on click */
+        }
+
+        /* Hide button with fade-out transition */
+        .fade-out {
+            opacity: 0;
+            pointer-events: none; /* Disable button after click */
+        }
+
+        /* iPhone SE */
+        @media (max-height: 800px) {
+            .body {
+                font-size: 20 px
+            }
+            .fade-text {
+                margin-bottom: 25px;
+                font-size: 25px;  /* Adjust font size */
+            }
+
+            .button-class {
+                font-size: 18px;
+                padding: 12px 12px;
+            }
+        }
+
+        /* Other Media Queries for larger screens */
+        /* iPhone 12, XR, Pro */
+        @media (min-width: 375px) and (min-height: 800px) { 
+            body {
+                font-size: 24px;
+            }
+
+            .fade-text {
+                font-size: 35px; 
+                margin-bottom: 45px;
+                margin-right: 2px;
+                margin-left: 2px
+
+            }
+
+            .button-class {
+                font-size: 25px;
+                padding: 15px 30px;
+            }
+        }
+
+        /* Tablets */
+        @media (min-width: 700px) { 
+            body {
+                font-size: 24px;
+            }
+
+            .fade-text {
+                font-size: 50px;
+                margin-bottom: 50px;
+                margin-right: 2px;
+                margin-left: 2px
+            }
+
+            .button-class {
+                font-size: 30px;
+                padding: 25px 50px;
+            }
+        }
+
+        /* Desktop */
+        @media (min-width: 1000px) {
+            body {
+                font-size: 40vw;
+            }
+            .fade-text {
+                margin-bottom: 70px;
+            }
+            .button-class {
+                font-size: 30px; /* Fixed font size for desktop */
+                padding: 20px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fade-in text blocks -->
+    <div class="fade-text">We have lost nearly 3 billion birds since 1970</div>
+    <div class="fade-text">3BB is an interactive data project that visualizes this loss as stars</div>
+    <div class="fade-text">Each star represents 10,000 birds lost</div>
+    <!-- Button to trigger fade-out and fade-in -->
+    <button class="button-class" id="enterButton">Next</button>
+
+    <script>
+        // Wait for the DOM to fully load
+        window.onload = function() {
+            // Select all text elements with the "fade-text" class
+            const fadeTextElements = document.querySelectorAll('.fade-text');
+            const enterButton = document.getElementById("enterButton");
+
+            // Show each element one by one after the page loads
+            fadeTextElements.forEach(function(el, index) {
+                setTimeout(function() {
+                    el.style.display = 'block'; // Make the element visible
+                    el.style.animation = "fadeIn 6s cubic-bezier(0.4, 0, 0.2, 1) forwards"; // Start fade-in animation with slower and smoother timing
+                }, index * 4000); // Delay each one by 6 seconds (now slower fade)
+            });
+
+            // After the last text block has faded in, show the button
+            setTimeout(function() {
+                enterButton.style.opacity = "1"; // Make the button visible
+                enterButton.style.pointerEvents = "auto"; // Enable the button to be clickable
+            }, fadeTextElements.length * 4000); // Wait until all text has faded in
+
+            // Handle button click
+            enterButton.addEventListener("click", function() {
+                // Fade out the button and text
+                enterButton.classList.add("fade-out"); // Fade out button
+                fadeTextElements.forEach(function(el) {
+                    el.style.opacity = "0"; // Fade out text elements
+                });
+
+                // After button fades out, navigate to another page (change URL as needed)
+                setTimeout(function() {
+                    window.location.href = "third-page.html"; // Redirect after fade-out
+                }, 1000); // Delay to match the fade-out duration
+            });
+        };
+    </script>
+
+</body>
+</html>
