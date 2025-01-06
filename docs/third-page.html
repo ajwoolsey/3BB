@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sequential Fade-in Containers with Button</title>
+  <style>
+    /* Global Reset */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Sarpanch", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #1a1a2e;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      min-height: 100vh;  /* Make sure the body takes full screen height */
+      overflow: hidden;   /* Prevent any body overflow */
+      -webkit-overflow-scrolling: touch; /* Add smooth scrolling */
+    }
+
+    .responsive-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      height: 100%;
+      padding: 0 15px;
+      overflow: hidden;  /* Prevent horizontal scrolling */
+    }
+
+    .wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      width: 100%;
+      flex-grow: 1;
+      margin-bottom: 20px;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 500px;
+      flex-grow: 1;
+      min-width: 280px;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 10px;
+      background-color: #1a1a2e;
+      border-radius: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1s ease forwards;
+      width: 100%;
+    }
+
+    .container img {
+      width: 20vw;
+      height: 20vw;
+      margin-right: 15px;
+      border-radius: 5px;
+    }
+
+    .text {
+      font-size: 18px;
+      color: #f0f0f0;
+      text-align: left;
+      line-height: 1.4;
+      max-width: 90%;
+    }
+
+    .buttonwrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .btn {
+      background-color: #2e3b52;
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 4px;
+      text-decoration: none;
+      width: 100%;
+      max-width: 300px;
+      transition: transform 0.3s ease, background-color 0.3s ease, opacity 1s ease-out;
+      opacity: 0;
+      pointer-events: auto;
+      font-family: "Sarpanch", sans-serif;
+    }
+
+    .btn:hover {
+      background-color: #243140;
+    }
+
+    @keyframes fadeInButton {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn {
+      animation: fadeInButton 1s ease forwards;
+      animation-delay: 3.5s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 375px) {
+      .responsive-wrapper {
+        height: auto;
+        width: 100%;
+        padding: 0;
+      }
+
+      .wrapper {
+        flex-direction: column;
+        gap: 10px;
+        justify-content: flex-start;
+        height: auto;
+      }
+
+      .column {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 15px;
+      }
+
+      .container img {
+        width: 40vw;
+        height: 40vw;
+      }
+
+      .text {
+        font-size: 14px;
+        max-width: 90%;
+      }
+
+      .btn {
+        font-size: 14px;
+        padding: 10px 18px;
+        width: 100%;
+        max-width: 280px;
+        padding-bottom: 20px;
+      }
+
+      .buttonwrapper {
+        padding-bottom: 15px;
+      }
+    }
+
+    /* Tablet and larger devices */
+    @media (min-width: 768px) {
+      .container img {
+        width: 15vw;
+        height: 15vw;
+      }
+
+      .text {
+        font-size: 20px;
+      }
+
+      .btn {
+        font-size: 16px;
+        padding: 14px 24px;
+        width: 70%;
+        max-width: 320px;
+      }
+    }
+
+    /* Desktop */
+    @media (min-width: 1024px) {
+      .container img {
+        width: 12vw;
+        height: 12vw;
+      }
+
+      .text {
+        font-size: 40px;
+      }
+
+      .btn {
+        font-size: 25px;
+        padding: 16px 28px;
+        width: 60%;
+        max-width: 350px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="responsive-wrapper">
+    <div class="wrapper">
+      <div class="column">
+        <div class="container">
+          <img src="https://i.ibb.co/RyHdGGx/pantool.png" alt="Image 1">
+          <div class="text">Toggle panning</div>
+        </div>
+        <div class="container">
+          <img src="https://i.ibb.co/c3Q8Xqh/boxzoom.png" alt="Image 2">
+          <div class="text">Toggle box zoom</div>
+        </div>
+        <div class="container">
+          <img src="https://i.ibb.co/HT6Yj93/mousezoom.png" alt="Image 3">
+          <div class="text">Toggle mouse zoom</div>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="container">
+          <img src="https://i.ibb.co/zf5GGmY/downloadpng.png" alt="Image 4">
+          <div class="text">Download plot as an image</div>
+        </div>
+        <div class="container">
+          <img src="https://i.ibb.co/3YcZSVq/reset.png" alt="Image 5">
+          <div class="text">Reset to original zoom</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttonwrapper">
+      <a href="visualization.html">
+        <button class="btn">Explore the Visualization</button>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Force reflow in Chrome for responsiveness issues
+    window.addEventListener('load', function() {
+      document.body.style.display = 'none';  // Hide body initially
+      setTimeout(function() {
+        document.body.style.display = '';  // Re-enable body after some delay
+      }, 1);
+    });
+  </script>
+</body>
+</html>

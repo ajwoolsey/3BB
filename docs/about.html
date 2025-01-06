@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <title>About</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Major Mono Display", monospace;
+            background-color: #0d0d0d;
+            color: #f0f0f0;
+            box-sizing: border-box;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #0d0d0d;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 1.5em;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            color: #CF9FFF;
+        }
+
+        .content {
+            margin-top: 60px; /* Adjust to match the header's height */
+            padding: 20px;
+        }
+
+        .content h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            font-family: "Major Mono Display", monospace;
+        }
+
+        .content p {
+            font-size: 1.5em;
+            font-family: "Mona Sans", serif;
+        }
+
+         /* Styling the specific link */
+         a[href="https://www.science.org/doi/10.1126/science.aaw1313"] {
+            color: #CF9FFF; /* Tomato red */
+            text-decoration: underline;
+        }
+
+        a[href="https://www.science.org/doi/10.1126/science.aaw1313"]:hover {
+            color: #ADD8E6; /* Gold on hover */
+        }
+
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 5pxv ;
+            }
+
+            nav {
+                justify-content: flex-start;
+                width: 100%;
+                gap: 10px;
+            }
+            .content {
+                margin-top: 35px;
+            }
+            .content h1 {
+                font-size: 1.5em;
+            }
+
+            .content p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<div class="content">
+    <h1>Introduction</h1>
+    <p>We are living in a time of tremendous and unprecedented ecological loss, with various forms of life on earth disappearing at a rate unheard of in human history. Ecological grief- the mourning in response to the deterioration of nature- remains largely unacknowledged in dialogues surrounding biodiversity loss and climate change. Culturally, we lack the social systems and structures to support the grief of non-human animals and natural features, resulting in “disenfranchised grief”- grief that is experienced but cannot be openly acknowledged or publicly mourned <sup>1</sup>. There exists a fixation on technical solutions to curb ecological loss, with emotional dwelling viewed as unnecessary and extravagant due to the extreme urgency of the situation. However, genuine ecological mourning is not diametrically opposed to practical action, rather an essential part of environmental decision-making, incorporating social, cultural, and ecological dimensions of biodiversity loss and forcing us to come to terms with what it means to be human in the age of tremendous wild death.
+        </p>
+    <p>3BB examines the power of a slowed approach to ecological mourning in the form of a data visualization representing 3 billion lost birds as stars in the sky. By engaging in slow ecological mourning through data storytelling and aesthetics, this piece acts as a public tool of ecological grief, bringing visibility to the unseen grief of biodiversity loss and climate change and demonstrating that thoughtful engagement with grief is both insightful on its own and ethically necessary to build a better world.</p>
+    <br>
+    <h1>Data Sources</h1>
+    <p>The data is sourced from the <a href="https://www.science.org/doi/10.1126/science.aaw1313">Decline of the North American avifauna</a> report from Rosenberg et. al, documenting a widespread net loss of nearly 3 billion birds in North America since 1970. This report uses various sources for recent population size estimates and trajectories for individual species, including the North American Breeding Bird Survey, the Avian Conservation Assessment Database, and waterfowl surveys from the US Fish and Wildlife Service. This project uses the estimated change in number of breeding individuals from 1970-2017 based on population estimates and trajectories, focusing on the species that have experienced population loss since 1970. To process and visualize the data, the loss numbers had to be scaled by a factor of 10,000, thereby omitting 7 species (Gray Kingbird, Dovekie, Limpkin, Bridled Titmouse, Groove-billed Ani, Mexican Jay, Clark’s Nutcracker, Wilson’s Plover) with a scaled loss value equalling less than one. 
+    </p>
+    <p>For more information on the dataset and data visualization process, please visit the project’s GitHub repository.</p>
+</div>
+
+</body>
+</html>
