@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fade-In Text and Button Fade-Out</title>
+    <title>3BB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap" rel="stylesheet"> 
     <style>
         /* Initial styles for the body */
         body {
             margin: 0;
             padding: 0;
-            font-family: "Sarpanch", sans-serif;
+            font-family: "Mona Sans", "serif";
+            font-weight: 200;
             background-color: #1a1a2e;
             color: #f0f0f0;
             height: 100vh;
@@ -63,7 +68,7 @@
             transition: transform 0.3s ease, background-color 0.3s ease, opacity 1s ease-out;
             opacity: 0;  /* Initially hidden */
             pointer-events: none;  /* Disable button initially */
-            font-family: "Sarpanch", sans-serif;
+            font-family: "Noto Sans Mono", serif;
             font-weight: 400;
             font-style: normal;
         }
@@ -145,6 +150,8 @@
             }
             .fade-text {
                 margin-bottom: 70px;
+                padding-left: 7vw;
+                padding-right: 7vw
             }
             .button-class {
                 font-size: 30px; /* Fixed font size for desktop */
@@ -158,9 +165,9 @@
     <!-- Fade-in text blocks -->
     <div class="fade-text">We have lost nearly 3 billion birds since 1970</div>
     <div class="fade-text">3BB is an interactive data project that visualizes this loss as stars</div>
-    <div class="fade-text">Each star represents 10,000 birds lost</div>
+    <div class="fade-text">Each star represents 10,000 lost birds</div>
     <!-- Button to trigger fade-out and fade-in -->
-    <button class="button-class" id="enterButton">Next</button>
+    <button class="button-class" id="enterButton">Interface Guide</button>
 
     <script>
         // Wait for the DOM to fully load
