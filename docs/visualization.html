@@ -65,6 +65,26 @@
             width: 100px;
             height: 100px;
         }
+         /* Responsive Design */
+         @media (max-width: 600px) {
+            nav {
+                font-size: 1em;
+            }
+            .content {
+                height: calc(100vh - 20px);
+            }
+            iframe {
+                height: 100vh;
+            }
+        }
+        @media (min-width: 601px) {
+            nav a {
+                font-size: 1.5em;
+            }
+            iframe {
+                height: 100vh;
+            }
+        }
     </style>
 </head>
 <body>
@@ -138,15 +158,15 @@
             iframe.style.display = 'none'; // Hide iframe until it is ready
 
             // If it's a mobile device, refresh the page after 1 second
-            if (isMobile()) {
-                if (!sessionStorage.getItem('pageReloaded')) { // Check if page has already reloaded
-                    sessionStorage.setItem('pageReloaded', 'true');
-                    console.log("Refreshing the page on mobile...");
-                    setTimeout(() => {
-                        window.location.reload(); // Refresh the page after 1 second
-                    }, 1000); // Wait 1 second before refreshing
-                }
-            }
+            // if (isMobile()) {
+            //     if (!sessionStorage.getItem('pageReloaded')) { // Check if page has already reloaded
+            //         sessionStorage.setItem('pageReloaded', 'true');
+            //         console.log("Refreshing the page on mobile...");
+            //         setTimeout(() => {
+            //             window.location.reload(); // Refresh the page after 1 second
+            //         }, 1000); // Wait 1 second before refreshing
+            //     }
+            // }
         };
     </script>
 </body>
