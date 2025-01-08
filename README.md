@@ -15,11 +15,11 @@ This project was created in Jupyter Notebook using the open-source Python librar
 
 ## This repository contains:
 
-*[docs](#docs): files for the deployed site
-*[project_files](#project_files): supporting files for the project including:
-  *[birdlossdataset.xlsx](birdlossdataset.xlsx): Excel file showing source data from Rosenberg et al. 2019
-  *[determining_coordinates.xlsx](determining_coordinates.xlsx): Excel file showing determination of dummy X and Y coordinates for plotting
-  *[finalcode.ipynb](finalcode.ipynb): Bokeh plot generation code
-  *[plot_final.html}(plot_final.html): HTML file of generated plot from finalcode.ipynb
-  *[plotting_process.ipynb](plotting_process.ipynb): Jupyter Notebook file showing function development and visualization process using Bokeh and Holoviews
-  *[test_points.csv](test_points.csv): CSV with species name, assigned key, and dummy X and Y coordinates for plotting
+* [docs](#docs): files for the deployed site
+* [project_files](#project_files): supporting files for the project including:
+  * [birdlossdataset.xlsx](birdlossdataset.xlsx): Excel file showing source data from Rosenberg et al. 2019
+  * [determining_coordinates.xlsx](determining_coordinates.xlsx): Excel file showing determination of dummy X and Y coordinates for plotting
+  * [finalcode.ipynb](finalcode.ipynb): Bokeh plot generation code
+  * [plot_final.html}(plot_final.html): HTML file of generated plot from finalcode.ipynb
+  * [plotting_process.ipynb](plotting_process.ipynb): Jupyter Notebook file showing function development and visualization process using Bokeh and Holoviews
+  * [test_points.csv](test_points.csv): CSV with species name, assigned key, and dummy X and Y coordinates for plotting
