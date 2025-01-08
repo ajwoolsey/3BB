@@ -17,9 +17,9 @@ This project was created in Jupyter Notebook using the open-source Python librar
 
 * [docs](docs): files for the deployed site
 * [project_files](project_files): supporting files for the project including:
-  * birdlossdataset.xlsx: Excel file showing source data from Rosenberg et al. 2019
-  * determining_coordinates.xlsx: Excel file showing determination of dummy X and Y coordinates for plotting
-  * finalcode.ipynb: Bokeh plot generation code
-  * plot_final.html: HTML file of generated plot from finalcode.ipynb
-  * plotting_process.ipynb: Jupyter Notebook file showing function development and visualization process using Bokeh and Holoviews
-  * test_points.csv: CSV with bird species name, assigned key, and dummy X and Y coordinates for plotting
+  * <ins>**birdlossdataset.xlsx**</ins>: Excel file showing source data from Rosenberg et al. 2019
+  * <ins>**determining_coordinates.xlsx**</ins>: Excel file showing determination of dummy X and Y coordinates for plotting
+  * <ins>**finalcode.ipynb**</ins>: Bokeh plot generation code
+  * <ins>**plot_final.html**</ins>: HTML file of generated plot from finalcode.ipynb
+  * <ins>**plotting_process.ipynb**</ins>: Jupyter Notebook file showing function and visualization process using Bokeh and Holoviews
+  * <ins>**test_points.csv**</ins>: CSV with bird species name, assigned key, and dummy X and Y coordinates for plotting
