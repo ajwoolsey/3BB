@@ -71,16 +71,25 @@
             text-align: center;
         }
 
-        .loader img {
-            width: 100px;
-            height: 100px;
-            /* Ensure the GIF animates on mobile */
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: -moz-crisp-edges;
-            image-rendering: -o-crisp-edges;
-            image-rendering: crisp-edges;
+        .loader::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 6px solid #CF9FFF;
+            border-color: #CF9FFF transparent #CF9FFF transparent;
+            animation: loader 1.2s linear infinite;
         }
 
+        @keyframes loader {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
         #reloadButton {
             margin-top: 10px;
             padding: 5px 10px;
@@ -169,10 +178,14 @@
     </header>
 
     <div class="content">
-        <!-- Loader with GIF -->
-        <div class="loader">
-            <img src="load-1110.gif" alt="Loading...">
-        </div>
+        <!-- Loader with CSS animation -->
+        <div class="loader"></div>
+
+        <!-- Embed the iframe -->
+        <iframe src="plot_final.html"></iframe>
+
+        <!-- Add a reload button -->
+        <button id="reloadButton" onclick="reloadPage()">Reload Page</button>
 
         <!-- Embed the iframe -->
         <iframe src="plot_final.html"></iframe>
@@ -181,8 +194,10 @@
     <script>
         const iframe = document.querySelector('iframe');
         const loader = document.querySelector('.loader');
+        const reloadButton = document.getElementById('reloadButton');
         const loadTimeout = 30000; // 30 seconds
         let loadTimer;
+        let checkContentInterval;
 
         function isMobile() {
             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -197,7 +212,13 @@
                 const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
                 const bodyContent = iframeDoc.body.innerText.trim();
                 if (bodyContent === '...') {
-                    reloadPage();
+                    if (isMobile()) {
+                        reloadPage();
+                    } else {
+                        loader.style.display = 'block';
+                        iframe.style.display = 'none';
+                        reloadButton.style.display = 'block';
+                    }
                 }
             } catch (e) {
                 console.error('Error checking iframe content:', e);
@@ -208,9 +229,12 @@
             loadTimer = setTimeout(() => {
                 if (isMobile()) {
                     reloadPage();
+                } else {
+                    reloadButton.style.display = 'block';
                 }
             }, loadTimeout);
         }
+
         iframe.addEventListener('load', () => {
             clearTimeout(loadTimer);
             loader.style.display = 'none';
@@ -218,13 +242,18 @@
 
             // Check iframe content after a short delay
             setTimeout(checkIframeContent, 1000);
+
+            // Start periodic checks
+            checkContentInterval = setInterval(checkIframeContent, 5000);
         });
 
         window.addEventListener('load', startLoading);
         iframe.addEventListener('error', startLoading);
 
-        // Periodically check iframe content
-        setInterval(checkIframeContent, 5000);
+        // Clear interval when page is unloaded
+        window.addEventListener('beforeunload', () => {
+            clearInterval(checkContentInterval);
+        });
     </script>
 
 
