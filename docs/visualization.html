@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>3BB</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -101,24 +101,23 @@
         </div>
         <iframe src="plot_final.html"></iframe>
     </div>
-    </div>
 
     <script>
         const iframe = document.querySelector('iframe');
         const loader = document.querySelector('.loader');
-        const maxAttempts = 3;
+        const maxAttempts = 5; // Increased max attempts
         let attempts = 0;
-    
+
         function isMobile() {
             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         }
-    
+
         function checkAndReload() {
             attempts++;
             try {
                 const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                if (iframeDoc.body.innerHTML.trim() === '') {
-                    throw new Error('Empty content');
+                if (iframeDoc.body.innerHTML.trim() === '' || iframeDoc.body.innerHTML.includes('...')) {
+                    throw new Error('Empty or incomplete content');
                 }
                 // Content loaded successfully
                 loader.style.display = 'none';
@@ -128,36 +127,29 @@
                 if (attempts < maxAttempts) {
                     console.log(`Attempt ${attempts}: Reloading...`);
                     setTimeout(() => {
-                        iframe.src = iframe.src; // Reload iframe
+                        iframe.src = iframe.src.split('?')[0] + '?t=' + new Date().getTime(); // Add timestamp to force reload
                     }, 2000); // Wait 2 seconds before reloading
                 } else {
                     console.log('Max attempts reached. Showing error message.');
-                    loader.innerHTML = '<p>Failed to load content. Please try again later.</p>';
+                    loader.innerHTML = '<p>Failed to load content. Please try refreshing the page.</p>';
                 }
             }
         }
-    
+
         function handleIframeLoad() {
-            loader.style.display = 'none';
-            iframe.style.display = 'block';
-        }
-    
-        if (isMobile()) {
-            iframe.onload = checkAndReload;
-            iframe.onerror = checkAndReload;
-        } else {
-            iframe.onload = handleIframeLoad;
-        }
-    
-        // Initial load
-        window.onload = () => {
+            // If it's mobile, attempt to reload if it's not loading properly
             if (isMobile()) {
                 checkAndReload();
             } else {
-                handleIframeLoad();
+                loader.style.display = 'none';
+                iframe.style.display = 'block';
             }
-        };
-    </script>
+        }
 
+        iframe.onload = handleIframeLoad;
+
+        // Initial load
+        window.onload = handleIframeLoad;
+    </script>
 </body>
 </html>
