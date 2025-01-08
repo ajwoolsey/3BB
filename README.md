@@ -15,7 +15,7 @@ This project was created in Jupyter Notebook using the open-source Python librar
 
 ## This repository contains:
 
-* [docs](#docs): files for the deployed site
+* [docs](docs): files for the deployed site
 * [project_files](#project_files): supporting files for the project including:
   * [birdlossdataset.xlsx](birdlossdataset.xlsx): Excel file showing source data from Rosenberg et al. 2019
   * [determining_coordinates.xlsx](determining_coordinates.xlsx): Excel file showing determination of dummy X and Y coordinates for plotting
