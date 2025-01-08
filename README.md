@@ -1,8 +1,8 @@
 # 3BB
-### by: Amanda Woolsey
+**by Amanda Woolsey**
 
 ## Abstract
-“Dealing with extinction in this way- taking it seriously, not rushing to overcome it- might be the most important and ethical work of our time” - Thom Van Dooren, field philosopher
+_“Dealing with extinction in this way- taking it seriously, not rushing to overcome it- might be the most important and ethical work of our time”_ - Thom Van Dooren, field philosopher
 
 Undisputedly, we are living in a time of tremendous and unprecedented ecological loss. Various forms of life on earth are disappearing at a rate unheard of in human history, with a growing amount of evidence suggesting that we are in a period of mass biodiversity loss and extinction. This extinction event is marked by a series of environmental catastrophes that vary in acceleration, intensity, and impact, such as climate-change driven weather events wiping out an endemic island species, to habitat loss and fragmentation leading to the slow death of a once-common species. One such piece of supporting evidence is Rosenberg et al.'s widely cited 2019 paper _Decline of the North American avifauna_, estimating a net loss of nearly 3 billion birds since 2019. Anthropogenic causes of biodiversity loss are well documented, however, less present in this dialogue is the “landscape of damage we carry inside of us”; the collective sense of grief felt by humans in response to the deterioration of nature. 
 
