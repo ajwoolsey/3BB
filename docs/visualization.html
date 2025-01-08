@@ -99,33 +99,35 @@
         <div class="loader">
             <img src="load-1110.gif" alt="Loading...">
         </div>
-        <iframe src="plot_final.html"></iframe>
+        <iframe id="bokeh-iframe" src="plot_final.html"></iframe>
     </div>
 
     <script>
-        const iframe = document.querySelector('iframe');
+        const iframe = document.getElementById('bokeh-iframe');
         const loader = document.querySelector('.loader');
-        const maxAttempts = 5; // Increased max attempts
+        const maxAttempts = 5; // Maximum attempts to reload if there's an issue
         let attempts = 0;
 
         function isMobile() {
             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         }
 
+        // Function to reload iframe if it doesn't load correctly
         function checkAndReload() {
             attempts++;
             try {
                 const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                if (iframeDoc.body.innerHTML.trim() === '' || iframeDoc.body.innerHTML.includes('...')) {
-                    throw new Error('Empty or incomplete content');
+                if (!iframeDoc || iframeDoc.body.innerHTML.trim() === '' || iframeDoc.body.innerHTML.includes('...')) {
+                    throw new Error('Content not loaded correctly');
                 }
                 // Content loaded successfully
                 loader.style.display = 'none';
                 iframe.style.display = 'block';
+
             } catch (e) {
                 console.error('Error loading content:', e);
                 if (attempts < maxAttempts) {
-                    console.log(`Attempt ${attempts}: Reloading...`);
+                    console.log(`Attempt ${attempts}: Reloading iframe...`);
                     setTimeout(() => {
                         iframe.src = iframe.src.split('?')[0] + '?t=' + new Date().getTime(); // Add timestamp to force reload
                     }, 2000); // Wait 2 seconds before reloading
@@ -136,20 +138,34 @@
             }
         }
 
+        // Handle iframe load event
         function handleIframeLoad() {
-            // If it's mobile, attempt to reload if it's not loading properly
-            if (isMobile()) {
-                checkAndReload();
-            } else {
-                loader.style.display = 'none';
-                iframe.style.display = 'block';
-            }
+            loader.style.display = 'none';
+            iframe.style.display = 'block';
         }
 
-        iframe.onload = handleIframeLoad;
+        // Initially show the loader and try loading the iframe
+        iframe.onload = () => {
+            // Check the iframe content after 1 second to ensure it is loaded properly
+            setTimeout(() => {
+                checkAndReload();
+            }, 1000); // Delay by 1 second to check if content is loaded
+        };
 
-        // Initial load
-        window.onload = handleIframeLoad;
+        // Initial load handler
+        window.onload = () => {
+            loader.style.display = 'block'; // Ensure the loader is visible initially
+            iframe.style.display = 'none'; // Hide iframe until it is ready
+            handleIframeLoad();
+
+            // If it's a mobile device, refresh the page after 1 second
+            if (isMobile()) {
+                setTimeout(() => {
+                    console.log("Refreshing the page on mobile...");
+                    window.location.reload(); // Refresh the page after 1 second
+                }, 1000); // Wait 1 second before refreshing
+            }
+        };
     </script>
 </body>
 </html>
