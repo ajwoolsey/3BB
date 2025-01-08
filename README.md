@@ -1,4 +1,6 @@
 # 3BB
+### by: Amanda Woolsey
+
 ## Abstract
 “Dealing with extinction in this way- taking it seriously, not rushing to overcome it- might be the most important and ethical work of our time” - Thom Van Dooren, field philosopher
 
