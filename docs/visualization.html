@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Noto+Sans+Mono:wght@100..900&display=swap" rel="stylesheet">
+<link rel="preload" href="load-1110.gif" as="image">
     <style>
         html, body {
             margin: 0;
@@ -52,20 +53,20 @@
         .content {
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;  /* Align content to the top */
+            justify-content: flex-start;
             align-items: center;
-            height: calc(100vh - 20px);  /* Adjust to account for the fixed header */
-            padding-top: 10px;  /* Reduced padding-top for smaller screens */
+            height: calc(100vh - 20px);
+            padding-top: 10px;
             position: relative;
             box-sizing: border-box;
-            width: 100%;  /* Ensure content takes up full width */
+            width: 100%;
         }
 
         iframe {
             border: none;
-            width: 100%;  /* Ensure iframe takes full width */
+            width: 100%;
             height: 100%;
-            display: none; /* Initially hidden */
+            display: none;
         }
 
         .loader {
@@ -73,11 +74,22 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            text-align: center;
         }
 
         .loader img {
-            width: 100px; /* Increased size */
-            height: 100px; /* Increased size */
+            width: 100px;
+            height: 100px;
+        }
+
+        #reloadButton {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #CF9FFF;
+            color: #0d0d0d;
+            border: none;
+            cursor: pointer;
+            display: none;
         }
 
         /* Responsive Design for smaller screens */
@@ -93,12 +105,14 @@
                 gap: 10px;
                 font-size: .5em;
             }
+
             .content {
-                padding-top: 44px; /* Reduced padding-top even more */
-                height: calc(100vh - 20px); /* Take up full height minus the header */
+                padding-top: 44px;
+                height: calc(100vh - 20px);
             }
+
             iframe {
-                height: 100vh; /* Limit iframe height */
+                height: 100vh;
             }
         }
         @media (max-width: 600px) {
@@ -114,11 +128,11 @@
                 font-size: 1.5em;
             }
             .content {
-                padding-top: 44px; /* Reduced padding-top even more */
-                height: calc(100vh - 20px); /* Take up full height minus the header */
+                padding-top: 44px;
+                height: calc(100vh - 20px);
             }
             iframe {
-                height: 100vh; /* Limit iframe height */
+                height: 100vh;
             }
         }
 
@@ -128,11 +142,11 @@
                 font-size: 1.5em;
             }
             .content {
-                padding-top: 44px; /* Slightly reduced padding-top for tablets */
-                height: calc(100vh - 20px); /* Adjust for header height */
+                padding-top: 44px;
+                height: calc(100vh - 20px);
             }
             iframe {
-                height: 100vh; /* Increase iframe height for tablets */
+                height: 100vh;
             }
         }
 
@@ -145,7 +159,7 @@
                 padding-top: 44px
             }
             iframe {
-                height: 100vh; /* Make iframe take up more space on larger screens */
+                height: 100vh;
             }
         }
 
@@ -165,23 +179,73 @@
         <!-- Loader with GIF -->
         <div class="loader">
             <img src="load-1110.gif" alt="Loading...">
+            <button id="reloadButton" style="display: none;">Reload</button>
         </div>
 
         <!-- Embed the iframe -->
-        <iframe src="plot_final.html"></iframe>
+        <iframe id="final_plot" src="about:blank"></iframe>
     </div>
 
     <script>
-        // Select elements
-        const iframe = document.querySelector('iframe');
+        const iframe = document.getElementById('final_plot');
         const loader = document.querySelector('.loader');
+        const loadingText = document.getElementById('loadingText');
+        const reloadButton = document.getElementById('reloadButton');
 
-        // Add event listener for iframe load
-        iframe.addEventListener('load', () => {
-            // Hide the loader and show the iframe
+        let loadAttempts = 0;
+        const maxLoadAttempts = 3;
+        const loadTimeout = 20000; // 20 seconds
+        let loadTimer;
+
+        function loadPlot() {
+            loadAttempts++;
+            iframe.src = 'plot_final.html';
+            startLoadingTimer();
+            
+            iframe.onerror = function() {
+                handleLoadError();
+            };
+        }
+
+        function showFullPlot() {
+            clearTimeout(loadTimer);
             loader.style.display = 'none';
             iframe.style.display = 'block';
-        });
+        }
+
+        function handleLoadError() {
+            clearTimeout(loadTimer);
+            if (loadAttempts < maxLoadAttempts) {
+                loadingText.textContent = `Loading failed. Retrying... (Attempt ${loadAttempts + 1}/${maxLoadAttempts})`;
+                setTimeout(loadPlot, 2000);
+            } else {
+                loadingText.textContent = 'Failed to load the plot. Please try again.';
+                reloadButton.style.display = 'inline-block';
+            }
+        }
+
+        function startLoadingTimer() {
+            loadTimer = setTimeout(() => {
+                handleLoadError();
+            }, loadTimeout);
+        }
+
+        iframe.onload = function() {
+            if (iframe.contentDocument.body.innerHTML.trim() === '...') {
+                handleLoadError();
+            } else {
+                showFullPlot();
+            }
+        };
+
+        reloadButton.onclick = function() {
+            loadAttempts = 0;
+            loadingText.textContent = 'Loading...';
+            reloadButton.style.display = 'none';
+            loadPlot();
+        };
+
+        loadPlot();
     </script>
 
 </body>
