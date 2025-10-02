@@ -12,6 +12,7 @@ Undisputedly, we are living in a time of tremendous and unprecedented ecological
 ## Technical Specifications
 This project was created in Jupyter Notebook using the open-source Python libraries Holoviews and Bokeh to create the interactive data visualization. To run the plot generation Jupyter Notebook code (finalcode.ipynb) in the "project_files" folder, HuggingFace must be installed in a Python virtual environment. 
 
+## [Dissertation Link] (https://academicworks.cuny.edu/gc_etds/6180/)
 
 ## Repository content:
 
